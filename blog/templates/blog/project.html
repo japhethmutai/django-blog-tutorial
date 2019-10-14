@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="content-section">
+    <form id="project_form" method="POST" action="" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {% for hidden in projectForm.hidden_fields %}
+          <div class="form-group">
+            {{ hidden }}
+          </div>
+        {% endfor %}
+
+        {% for field in projectForm %}
+          <div class="form-group">
+            {{ field }} <br />
+          </div>
+        {% endfor %}
+
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <div class="form-group">
+            {{ form }}
+          </div>
+        {% endfor %}
+
+
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+  </div>
+{% endblock content %}
